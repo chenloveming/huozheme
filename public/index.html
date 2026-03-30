@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>活着么 - Am I Alive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- 登录页 -->
+        <div id="login-page" class="page active">
+            <h1>活着么</h1>
+            <input type="text" id="username" placeholder="账号 / 邮箱">
+            <input type="password" id="password" placeholder="密码">
+            <input type="text" id="phone" placeholder="手机号 (可选)">
+            <button onclick="login()">登录 / 注册</button>
+        </div>
+
+        <!-- 主页 / 签到页 -->
+        <div id="home-page" class="page">
+            <div class="stats-card">
+                <div class="streak" id="streak-display">0</div>
+                <div class="streak-label">连续存活 (天)</div>
+            </div>
+
+            <div id="checkin-area">
+                <p style="text-align:center; color:#666;">今天的你，还好吗？</p>
+                
+                <div class="status-grid">
+                    <div class="status-btn" onclick="selectStatus(this, '很好')">很好 😄</div>
+                    <div class="status-btn" onclick="selectStatus(this, '还行')">还行 😐</div>
+                    <div class="status-btn" onclick="selectStatus(this, '有点累')">有点累 😔</div>
+                    <div class="status-btn" onclick="selectStatus(this, '需要联系')">需要联系 🆘</div>
+                </div>
+
+                <textarea id="message" rows="2" placeholder="留一句话给家人吧..."></textarea>
+                
+                <button onclick="doCheckin()">确认签到</button>
+                <button class="secondary" onclick="show，补签")">补签</button> <!-- 简单演示补签入口 -->
+            </div>
+
+            <div id="history-area" style="display:none;">
+                <canvas id="trendChart"></canvas>
+                <button class="secondary" onclick="renderHome()">返回签到</button>
+            </div>
+
+            <div id="contacts-area" style="display:none;">
+                <h3>我的亲友</h3>
+                <input type="text" id="new-contact" placeholder="亲友邮箱或手机">
+                <button onclick="addContact()">添加亲友</button>
+                <ul id="contact-list" style="list-style:none; padding:0; margin-top:20px;"></ul>
+                <button class="secondary" onclick="renderHome()">返回</button>
+            </div>
+
+            <div class="nav-bar">
+                <div class="nav-item active" onclick="switchTab('home')">首页</div>
+                <div class="nav-item" onclick="switchTab('history')">趋势</div>
+                <div class="nav-item" onclick="switchTab('contacts')">亲友</div>
+                <div class="nav-item" onclick="logout()">退出</div>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+    <script src="chart.js"></script>
+</body>
+</html>
